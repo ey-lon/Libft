@@ -10,7 +10,7 @@ ft_substr, ft_strjoin, ft_strtrim, ft_split, ft_itoa, ft_strmapi, ft_striteri, f
 ### Bonus
 ft_lstnew, ft_lstnew, ft_lstsize, ft_lstsize, ft_lstadd_back, ft_lstdelone, ft_lstclear, ft_lstiter, ft_lstmap
 
-## Usage
+## How to use
 | command | info |
 | ------- | ---- |
 | `make` | to compile mandatory functions. |
