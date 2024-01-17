@@ -24,7 +24,7 @@ static void	ft_putnbr_in_str(int nbr, char *str, int len)
 	{
 		str[0] = '-';
 		n = -n;
-		end = 1;
+		end++;
 	}
 	while (len > end)
 	{
