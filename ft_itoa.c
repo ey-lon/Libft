@@ -14,23 +14,27 @@
 
 static void	ft_putnbr_in_str(int nbr, char *str, int len)
 {
-	long long	n;
 	int			end;
 
 	str[len] = '\0';
 	end = 0;
-	n = nbr;
-	if (n >= 0)
+	if (nbr == INT_MIN)
+	{
+		len--;
+		str[len] = (-(INT_MIN % 10)) + '0';
+		nbr = nbr / 10;
+	}
+	if (nbr < 0)
 	{
 		str[0] = '-';
-		n = -n;
+		nbr = -nbr;
 		end++;
 	}
 	while (len > end)
 	{
 		len--;
-		str[len] = (n % 10) + '0';
-		n = n / 10;
+		str[len] = (nbr % 10) + '0';
+		nbr = nbr / 10;
 	}
 }
 
@@ -38,23 +42,21 @@ static int	ft_len(int nbr)
 {
 	int	len;
 
-	if (nbr == -2147483648)
+	len = 1;
+	if (nbr == INT_MIN)
 	{
-		len = 11;
+		len++;
+		nbr = nbr / 10;
 	}
-	else
+	if (nbr < 0)
 	{
-		len = 1;
-		if (nbr < 0)
-		{
-			nbr = -nbr;
-			len++;
-		}
-		while (nbr >= 10)
-		{
-			nbr = nbr / 10;
-			len++;
-		}
+		nbr = -nbr;
+		len++;
+	}
+	while (nbr >= 10)
+	{
+		nbr = nbr / 10;
+		len++;
 	}
 	return (len);
 }
