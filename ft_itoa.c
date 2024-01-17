@@ -14,56 +14,60 @@
 
 static void	ft_putnbr_in_str(int nbr, char *str, int len)
 {
-	long	n;
+	long long	n;
+	int			end;
 
 	str[len] = '\0';
+	end = 0;
 	n = nbr;
 	if (n >= 0)
 	{
-		while (len >= 1)
-		{
-			len--;
-			str[len] = (n % 10) + '0';
-			n = n / 10;
-		}
+		str[0] = '-';
+		n = -n;
+		end = 1;
+	}
+	while (len > end)
+	{
+		len--;
+		str[len] = (n % 10) + '0';
+		n = n / 10;
+	}
+}
+
+static int	ft_len(int nbr)
+{
+	int	len;
+
+	if (nbr == -2147483648)
+	{
+		len = 11;
 	}
 	else
 	{
-		str[0] = '-';
-		n = -n;
-		while (len > 1)
+		len = 1;
+		if (nbr < 0)
 		{
-			len--;
-			str[len] = (n % 10) + '0';
-			n = n / 10;
+			nbr = -nbr;
+			len++;
+		}
+		while (nbr >= 10)
+		{
+			nbr = nbr / 10;
+			len++;
 		}
 	}
+	return (len);
 }
 
 char	*ft_itoa(int n)
 {
 	char		*str;
 	int			len;
-	int			temp;
 
-	temp = n;
-	if (n == -2147483648)
-		len = 11;
-	else
-	{
-		len = 1;
-		if (n < 0)
-		{
-			temp = -temp;
-			len++;
-		}
-		while (temp >= 10)
-		{
-			temp = temp / 10;
-			len++;
-		}
-	}
+	len = ft_len(n);
 	str = malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (NULL);
 	ft_putnbr_in_str(n, str, len);
 	return (str);
 }
